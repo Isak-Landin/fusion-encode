@@ -25,7 +25,7 @@ CHAR_TO_WORD_BUILTIN: Dict[str, str] = {
 WORD_TO_CHAR_BUILTIN: Dict[str, str] = {v: k for k, v in CHAR_TO_WORD_BUILTIN.items()}
 
 # ---- Notice appended to encrypted output ----
-APPENDED_NOTICE = "This message can be decrypted at https://fusionencode.com"
+APPENDED_NOTICE = "This message can be decrypted at https://fusionencode.com/alqaida/decrypt"
 NOTICE_DELIM = "\n\n"  # visual separator between payload and notice
 
 def _strip_notice(text: str) -> str:
