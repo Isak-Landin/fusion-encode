@@ -13,7 +13,7 @@ def create_app():
 
     @_app.get("/")
     def home():
-        return render_template("home.html", page_title="Fusion")
+        return render_template("index.html", page_title="Fusion")
 
     @_app.get("/healthz")
     def healthz():
