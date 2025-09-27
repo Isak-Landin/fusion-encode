@@ -24,6 +24,22 @@ CHAR_TO_WORD_BUILTIN: Dict[str, str] = {
 # Reverse built-in
 WORD_TO_CHAR_BUILTIN: Dict[str, str] = {v: k for k, v in CHAR_TO_WORD_BUILTIN.items()}
 
+# ---- Notice appended to encrypted output ----
+APPENDED_NOTICE = "This message can be decrypted at https://fusionencode.com"
+NOTICE_DELIM = "\n\n"  # visual separator between payload and notice
+
+def _strip_notice(text: str) -> str:
+    """
+    Remove the appended notice if present. Tolerant if the user didn't copy it.
+    Uses rfind to handle accidental duplicates by keeping the earliest payload.
+    """
+    if not text:
+        return text
+    idx = text.rfind(APPENDED_NOTICE)
+    if idx == -1:
+        return text.strip()
+    return text[:idx].rstrip()
+
 # ---- Load/validate external wordlist ----
 def _load_wordlist(path: str) -> Tuple[Dict[str, str], Dict[str, str]]:
     """
@@ -146,8 +162,12 @@ def decode_words_to_b64(words: str) -> str:
 # ---- High-level used by routes ----
 def encrypt_and_twist(plaintext: str) -> str:
     b64_ct = aes_encrypt_to_b64(plaintext)
-    return encode_words_from_b64(b64_ct)
+    wordified = encode_words_from_b64(b64_ct)
+    # Append a human-readable notice after the payload
+    return f"{wordified}{NOTICE_DELIM}{APPENDED_NOTICE}"
 
 def untwist_and_decrypt(wordified: str) -> str:
-    b64_ct = decode_words_to_b64(wordified)
+    # Accept both forms: with or without the notice present
+    cleaned = _strip_notice(wordified)
+    b64_ct = decode_words_to_b64(cleaned)
     return aes_decrypt_from_b64(b64_ct)
