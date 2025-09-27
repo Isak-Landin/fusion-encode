@@ -1,21 +1,73 @@
 {% extends "base.html" %}
+
+{% block extra_head %}
+<link href="/static/css/index.css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-<section class="hero card">
-  <h2>Wordified AES</h2>
-  <p class="lead">
-    Paste any message and we’ll AES-encrypt it, then “wordify” the ciphertext using a custom mapping
-    (e.g., A → <code>al-qaida</code>, B → <code>bomb</code>, etc.). You can also reverse the process to get your original text back.
-  </p>
-
-  <div class="cta-row">
-    <a class="btn" href="/alqaida/encrypt">Encrypt a message</a>
-    <a class="btn btn-secondary" href="/alqaida/decrypt">Decrypt a message</a>
+<section class="hero card hero--glow">
+  <div class="hero__text">
+    <h1 class="title">Wordified AES</h1>
+    <p class="subtitle">
+      Paste any message and we’ll AES-encrypt it, then “wordify” the ciphertext using your custom mapping.
+      You can also reverse the process to get your original text back.
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="/alqaida/encrypt">Encrypt a message</a>
+      <a class="btn btn-secondary" href="/alqaida/decrypt">Decrypt a message</a>
+    </div>
+    <div class="badges">
+      <span class="badge">Demo</span>
+      <span class="badge badge--info">Reproducible</span>
+      <span class="badge badge--muted">For fun</span>
+    </div>
   </div>
+</section>
 
-  <ul class="notes">
-    <li>This is a demo; mapping is for fun—don’t rely on it for real security.</li>
-    <li>Encryption uses a fixed key/nonce for now so examples are reproducible.</li>
-    <li>Use the Decrypt page to reverse any wordified output generated here.</li>
-  </ul>
+<section class="grid">
+  <div class="card step">
+    <div class="step__num">1</div>
+    <h3>Write</h3>
+    <p>Type your message (anything from a sentence to a paragraph).</p>
+  </div>
+  <div class="card step">
+    <div class="step__num">2</div>
+    <h3>Encrypt</h3>
+    <p>We use AES-GCM under the hood and then convert Base64 symbols to words from your wordlist.</p>
+  </div>
+  <div class="card step">
+    <div class="step__num">3</div>
+    <h3>Share</h3>
+    <p>Send the wordified output. The receiver pastes it into <em>Decrypt</em> to get the original text.</p>
+  </div>
+</section>
+
+<section class="card split">
+  <div class="split__col">
+    <h3>What this is</h3>
+    <ul class="list">
+      <li>A playful layer on top of AES that converts symbols into recognizable words.</li>
+      <li>Configurable mapping via a JSON wordlist.</li>
+      <li>Simple, single-page encrypt/decrypt UI.</li>
+    </ul>
+  </div>
+  <div class="split__col">
+    <h3>What this isn’t</h3>
+    <ul class="list">
+      <li>A replacement for real, audited cryptography practices.</li>
+      <li>A guarantee of secrecy if you reuse keys or share them improperly.</li>
+      <li>Production-grade key management—this is a demo by design.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="card tryit">
+  <h3>Quick demo</h3>
+  <p>Copy this into <strong>Encrypt</strong> to see how it transforms:</p>
+  <pre class="snippet">A little donkey was walking slowly along a dusty road when it noticed a bright yellow flower growing by the roadside.</pre>
+  <div class="cta-row">
+    <a class="btn btn-small" href="/alqaida/encrypt">Try Encrypt</a>
+    <a class="btn btn-small btn-secondary" href="/alqaida/decrypt">Try Decrypt</a>
+  </div>
 </section>
 {% endblock %}
