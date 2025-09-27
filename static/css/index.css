@@ -87,3 +87,16 @@
 }
 
 .btn-small { padding: 8px 12px; font-size: 14px; }
+
+/* Make anchor "buttons" behave like disabled buttons */
+.btn.disabled,
+.btn[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.6;
+  filter: saturate(0.7);
+}
+
+.btn.is-busy {
+  filter: brightness(0.9);
+}
+

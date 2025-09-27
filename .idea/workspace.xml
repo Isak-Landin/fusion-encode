@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48744ec3-31b9-435e-a25a-10802c99e090" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/alqaida/routes/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/alqaida/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/alqaida/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

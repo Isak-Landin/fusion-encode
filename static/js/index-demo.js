@@ -1,3 +1,4 @@
+// static/js/index-demo.js
 (function () {
   const $ = (sel) => document.querySelector(sel);
 
@@ -8,8 +9,7 @@
   const btnEncrypt = $("#demo-encrypt");
   const btnDecrypt = $("#demo-decrypt");
 
-  let currentText = ""; // holds last successful result shown in outEl
-
+  // --- helpers ---
   function setBusy(btn, busy) {
     if (busy) {
       btn.setAttribute("aria-busy", "true");
@@ -20,9 +20,18 @@
     }
   }
 
-  function disable(btn) {
+  function disableLink(btn) {
     btn.classList.add("disabled");
     btn.setAttribute("aria-disabled", "true");
+  }
+
+  function enableLink(btn) {
+    btn.classList.remove("disabled");
+    btn.removeAttribute("aria-disabled");
+  }
+
+  function isDisabled(btn) {
+    return btn.classList.contains("disabled");
   }
 
   function showError(msg) {
@@ -49,12 +58,12 @@
     return data.result;
   }
 
+  // --- button handlers ---
   btnEncrypt.addEventListener("click", async (e) => {
     e.preventDefault();
-    clearError();
+    if (isDisabled(btnEncrypt)) return;
 
-    // prevent rerun if already disabled
-    if (btnEncrypt.classList.contains("disabled")) return;
+    clearError();
 
     const endpoint = btnEncrypt.dataset.endpoint;
     const sample = sampleEl.textContent.trim();
@@ -62,11 +71,13 @@
     try {
       setBusy(btnEncrypt, true);
       const result = await callApi(endpoint, sample);
-      currentText = result;
-      outEl.textContent = result;
+
+      outEl.textContent = result;  // show encrypted text in the SAME box
       outEl.hidden = false;
-      // lock this button to avoid multiple encrypts of the same sample
-      disable(btnEncrypt);
+
+      // Toggle states: Encrypt off, Decrypt on
+      disableLink(btnEncrypt);
+      enableLink(btnDecrypt);
     } catch (err) {
       showError(err.message);
     } finally {
@@ -76,14 +87,12 @@
 
   btnDecrypt.addEventListener("click", async (e) => {
     e.preventDefault();
+    if (isDisabled(btnDecrypt)) return;
+
     clearError();
 
-    if (btnDecrypt.classList.contains("disabled")) return;
-
     const endpoint = btnDecrypt.dataset.endpoint;
-
-    // Prefer decrypting the current output (wordified text + notice)
-    const toDecrypt = (outEl.hidden ? "" : outEl.textContent.trim());
+    const toDecrypt = outEl.hidden ? "" : outEl.textContent.trim();
     if (!toDecrypt) {
       showError("Encrypt the sample first, then try decrypt.");
       return;
@@ -92,15 +101,20 @@
     try {
       setBusy(btnDecrypt, true);
       const result = await callApi(endpoint, toDecrypt);
-      currentText = result;
-      outEl.textContent = result;
-      outEl.hidden = false;
-      // lock this button after success
-      disable(btnDecrypt);
+
+      outEl.textContent = result;  // replace with decrypted/plain text
+
+      // Toggle states: Decrypt off, Encrypt on (can run again)
+      disableLink(btnDecrypt);
+      enableLink(btnEncrypt);
     } catch (err) {
       showError(err.message);
     } finally {
       setBusy(btnDecrypt, false);
     }
   });
+
+  // --- initial state on load ---
+  enableLink(btnEncrypt);
+  disableLink(btnDecrypt);
 })();
