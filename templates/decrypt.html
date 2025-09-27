@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Decrypt</h2>
+  <p>Paste the wordified ciphertext; we’ll reverse the mapping and decrypt.</p>
+
+  <form method="post" class="stack">
+    <label for="dec-input" class="label">Wordified message</label>
+    <textarea id="dec-input" name="text" class="textarea" rows="6" placeholder="al-qaida bomb ...">{{ text or "" }}</textarea>
+    <button class="btn" type="submit">Decrypt</button>
+  </form>
+
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  {% if result %}
+    <div class="result">
+      <div class="result-head">Plaintext</div>
+      <pre class="result-body">{{ result }}</pre>
+      <button class="btn-outline" onclick="navigator.clipboard.writeText(`{{ result }}`)">Copy</button>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

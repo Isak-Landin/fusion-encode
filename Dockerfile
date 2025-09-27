@@ -18,8 +18,8 @@ ENV PYTHONUNBUFFERED=1 \
     FLASK_ENV=production
 
 # Expose the Flask app port (matches APP_PORT)
-EXPOSE 5009
+EXPOSE 5911
 
 # Run with gunicorn for production
 # If your app module is app.py with variable "app"
-CMD ["gunicorn", "--bind", "0.0.0.0:5009", "--workers", "2", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5911", "--workers", "2", "app:app"]

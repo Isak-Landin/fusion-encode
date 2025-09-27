@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Encrypt</h2>
+  <p>Type your message. We’ll AES-encrypt it and apply your word mapping.</p>
+
+  <form method="post" class="stack">
+    <label for="enc-input" class="label">Your message</label>
+    <textarea id="enc-input" name="text" class="textarea" rows="6" placeholder="hello world">{{ text or "" }}</textarea>
+    <button class="btn" type="submit">Encrypt</button>
+  </form>
+
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  {% if result %}
+    <div class="result">
+      <div class="result-head">Result</div>
+      <pre class="result-body">{{ result }}</pre>
+      <button class="btn-outline" onclick="navigator.clipboard.writeText(`{{ result }}`)">Copy</button>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

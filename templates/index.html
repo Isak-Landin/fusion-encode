@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero card">
+  <h2>Wordified AES</h2>
+  <p class="lead">
+    Paste any message and we’ll AES-encrypt it, then “wordify” the ciphertext using a custom mapping
+    (e.g., A → <code>al-qaida</code>, B → <code>bomb</code>, etc.). You can also reverse the process to get your original text back.
+  </p>
+
+  <div class="cta-row">
+    <a class="btn" href="/alqaida/encrypt">Encrypt a message</a>
+    <a class="btn btn-secondary" href="/alqaida/decrypt">Decrypt a message</a>
+  </div>
+
+  <ul class="notes">
+    <li>This is a demo; mapping is for fun—don’t rely on it for real security.</li>
+    <li>Encryption uses a fixed key/nonce for now so examples are reproducible.</li>
+    <li>Use the Decrypt page to reverse any wordified output generated here.</li>
+  </ul>
+</section>
+{% endblock %}
