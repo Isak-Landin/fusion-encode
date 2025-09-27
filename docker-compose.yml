@@ -1,0 +1,30 @@
+services:
+  flask-app-fusion:
+    container_name: flask-app-fusion
+    restart: always
+    env_file: .env
+    build: .
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - APP_PORT=${APP_PORT}
+    networks:
+      - web_network
+
+  nginx-fusion:
+    container_name: nginx-fusion
+    restart: always
+    image: nginx:latest
+    ports:
+      - "${NGINX_PORT}:${NGINX_PORT}"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - flask-app-fusion
+    networks:
+      - web_network
+
+networks:
+  web_network:
+    driver: bridge
