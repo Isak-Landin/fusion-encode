@@ -2,9 +2,9 @@
 (function () {
   const $ = (sel) => document.querySelector(sel);
 
-  const sampleEl = $("#demo-snippet");
-  const outEl = $("#demo-output");
-  const errEl = $("#demo-error");
+  const sampleEl   = $("#demo-snippet");
+  const outEl      = $("#demo-output");
+  const errEl      = $("#demo-error");
 
   const btnEncrypt = $("#demo-encrypt");
   const btnDecrypt = $("#demo-decrypt");
@@ -44,11 +44,19 @@
     errEl.textContent = "";
   }
 
+  function scrollToBottom() {
+    // Smooth scroll to bottom so new/updated output is visible
+    window.scrollTo({
+      top: document.documentElement.scrollHeight || document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  }
+
   async function callApi(endpoint, text) {
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text })
+      body: JSON.stringify({ text }),
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok || !data.ok) {
@@ -66,18 +74,21 @@
     clearError();
 
     const endpoint = btnEncrypt.dataset.endpoint;
-    const sample = sampleEl.textContent.trim();
+    const sample   = sampleEl.textContent.trim();
 
     try {
       setBusy(btnEncrypt, true);
       const result = await callApi(endpoint, sample);
 
-      outEl.textContent = result;  // show encrypted text in the SAME box
+      outEl.textContent = result;   // show encrypted text in the SAME box
       outEl.hidden = false;
 
       // Toggle states: Encrypt off, Decrypt on
       disableLink(btnEncrypt);
       enableLink(btnDecrypt);
+
+      // Ensure user sees the updated output
+      scrollToBottom();
     } catch (err) {
       showError(err.message);
     } finally {
@@ -91,7 +102,7 @@
 
     clearError();
 
-    const endpoint = btnDecrypt.dataset.endpoint;
+    const endpoint  = btnDecrypt.dataset.endpoint;
     const toDecrypt = outEl.hidden ? "" : outEl.textContent.trim();
     if (!toDecrypt) {
       showError("Encrypt the sample first, then try decrypt.");
@@ -102,11 +113,14 @@
       setBusy(btnDecrypt, true);
       const result = await callApi(endpoint, toDecrypt);
 
-      outEl.textContent = result;  // replace with decrypted/plain text
+      outEl.textContent = result;   // replace with decrypted/plain text
 
-      // Toggle states: Decrypt off, Encrypt on (can run again)
+      // Toggle states: Decrypt off, Encrypt on (cycle can run again)
       disableLink(btnDecrypt);
       enableLink(btnEncrypt);
+
+      // Ensure user sees the updated output
+      scrollToBottom();
     } catch (err) {
       showError(err.message);
     } finally {
@@ -115,6 +129,6 @@
   });
 
   // --- initial state on load ---
-  enableLink(btnEncrypt);
-  disableLink(btnDecrypt);
+  enableLink(btnEncrypt);  // can start by encrypting the sample
+  disableLink(btnDecrypt); // decrypt becomes available after encrypt succeeds
 })();
