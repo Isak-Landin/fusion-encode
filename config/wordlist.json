@@ -1,5 +1,5 @@
 {
-  "A": "al-qaida",      "B": "bomb-bay",       "C": "cell-core",     "D": "detonate",
+  "A": "al-qaida",      "B": "comb",           "C": "cell-core",     "D": "detonate",
   "E": "ember",         "F": "flashpoint",     "G": "grenadier",     "H": "hijack",
   "I": "ignition",      "J": "jihadist",       "K": "kaliber",       "L": "launcher",
   "M": "martyr",        "N": "napalm",         "O": "outbreak",      "P": "payload",
@@ -8,15 +8,16 @@
   "Y": "yielding",      "Z": "zero-hour",
 
   "a": "alchemic",      "b": "backdoor",       "c": "covert",        "d": "decoy",
-  "e": "encrypted",     "f": "fuse",           "g": "guerilla",       "h": "hostage",
-  "i": "infiltrate",    "j": "jammer",         "k": "kryptonite",     "l": "latent",
-  "m": "manifold",      "n": "network",        "o": "operative",      "p": "proxy",
-  "q": "qubit",         "r": "rogue",          "s": "sleeper2",       "t": "trigger2",
-  "u": "underpass",     "v": "vector",         "w": "warlord",        "x": "x-section",
+  "e": "encrypted",     "f": "fuse",           "g": "guerilla",      "h": "hostage",
+  "i": "infiltrate",    "j": "jammer",         "k": "kryptonite",    "l": "latent",
+  "m": "manifold",      "n": "network",        "o": "operative",     "p": "proxy",
+  "q": "qubit",         "r": "rogue",          "s": "sleeperlite",   "t": "triggerlite",
+  "u": "underpass",     "v": "vector",         "w": "warlord",       "x": "x-section",
   "y": "yardarm",       "z": "zealot",
 
-  "0": "cell-0", "1": "cell-1", "2": "cell-2", "3": "cell-3", "4": "cell-4",
-  "5": "cell-5", "6": "cell-6", "7": "cell-7", "8": "cell-8", "9": "cell-9",
+  "0": "cinder",        "1": "ashfall",        "2": "fallow",        "3": "emberline",
+  "4": "grimalkin",     "5": "shrapnel",       "6": "overcast",      "7": "backblast",
+  "8": "ironclad",      "9": "nightwatch",
 
   "+": "plus", "/": "slash", "=": "pad"
 }
