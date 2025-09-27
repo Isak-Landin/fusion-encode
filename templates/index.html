@@ -66,10 +66,32 @@
 <section class="card tryit">
   <h3>Quick demo</h3>
   <p>Copy this into <strong>Encrypt</strong> to see how it transforms:</p>
-  <pre class="snippet">A little donkey was walking slowly along a dusty road when it noticed a bright yellow flower growing by the roadside.</pre>
+
+  <!-- Give the sample an id so JS can read it -->
+  <pre class="snippet" id="demo-snippet">A little donkey was walking slowly along a dusty road when it noticed a bright yellow flower growing by the roadside.</pre>
+
+  <!-- Result and error containers -->
+  <div id="demo-error" class="error" hidden></div>
+  <pre class="snippet" id="demo-output" hidden></pre>
+
   <div class="cta-row">
-    <a class="btn btn-small" href="/alqaida/encrypt">Try Encrypt</a>
-    <a class="btn btn-small btn-secondary" href="/alqaida/decrypt">Try Decrypt</a>
+    <a
+      class="btn btn-small"
+      id="demo-encrypt"
+      data-endpoint="{{ url_for('alqaida_blueprint.api_encrypt') }}"
+      href="#encrypt"
+    >Try Encrypt</a>
+
+    <a
+      class="btn btn-small btn-secondary"
+      id="demo-decrypt"
+      data-endpoint="{{ url_for('alqaida_blueprint.api_decrypt') }}"
+      href="#decrypt"
+    >Try Decrypt</a>
   </div>
 </section>
+
+<!-- Include the page JS at the bottom of the page (still within the template) -->
+<script src="{{ url_for('static', filename='js/index-demo.js') }}"></script>
+
 {% endblock %}
