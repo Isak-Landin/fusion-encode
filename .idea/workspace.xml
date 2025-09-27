@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48744ec3-31b9-435e-a25a-10802c99e090" name="Changes" comment="" />
+    <list default="true" id="48744ec3-31b9-435e-a25a-10802c99e090" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/config/wordlist.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/wordlist.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
