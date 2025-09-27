@@ -15,7 +15,12 @@ h2{margin:0 0 8px;font-size:22px}
 .cta-row{display:flex;gap:12px;margin:10px 0 8px;flex-wrap:wrap}
 .btn{display:inline-block;border:1px solid transparent;padding:10px 16px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#3ccf89);color:#0b140f;cursor:pointer;font-weight:700}
 .btn:hover{filter:brightness(1.06)}
-.btn-secondary{background:linear-gradient(180deg,var(--accent2),#4e87ff);color:#071326}
+
+.btn-secondary {
+  background: linear-gradient(180deg, #ff6b6b, #d64545); /* bright red → darker red */
+  color: #fff;  /* white text for contrast */
+}
+
 .btn-outline{margin-top:10px;padding:8px 14px;border-radius:10px;border:1px solid var(--border);background:#0e141c;color:var(--text);cursor:pointer}
 .stack{display:grid;gap:10px}
 .label{color:var(--muted);font-size:14px}
