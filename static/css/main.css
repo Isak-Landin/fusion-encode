@@ -6,7 +6,18 @@
 html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
 .container{width:min(900px,92vw);margin:0 auto;padding:18px}
 .hdr{display:flex;align-items:center;justify-content:space-between}
-.brand{margin:0;color:var(--accent);font-weight:700;letter-spacing:.5px}
+
+.brand{
+    font-weight:700;
+    letter-spacing:.5px;
+    margin:0;
+}
+
+.brand-link {
+    color:var(--accent);
+    text-decoration:none;
+}
+
 .nav a{color:var(--muted);text-decoration:none;margin-left:14px}
 .nav a:hover{color:var(--text)}
 .card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-top:20px}
