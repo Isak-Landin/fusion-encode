@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}?v=3">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}?v=4">
 
 {% endblock %}
 
@@ -14,8 +14,8 @@
       Your friend can paste the code words into the “Decrypt” page to read your secret again.
     </p>
     <div class="cta-row">
-      <a class="btn" href="/alqaida/encrypt">Make a Secret Message</a>
-      <a class="btn btn-secondary" href="/alqaida/decrypt">Read a Secret Message</a>
+      <a class="btn" href="/alqaida/encrypt"><span class="btn-cta">Make</span> a Secret Message</a>
+      <a class="btn btn-secondary" href="/alqaida/decrypt"><span class="btn-cta">Read</span> a Secret Message</a>
     </div>
     <div class="badges">
       <span class="badge">Easy</span>
