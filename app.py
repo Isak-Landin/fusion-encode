@@ -21,6 +21,8 @@ def create_app():
 
     _app.register_blueprint(alqaida_blueprint, url_prefix="/alqaida")
 
+    PLAUSIBLE = "https://plausible.io"  # if self-hosting, e.g. "https://analytics.fusionencode.com"
+
     @_app.after_request
     def add_security_headers(resp):
         resp.headers.setdefault("X-Content-Type-Options", "nosniff")
@@ -28,12 +30,20 @@ def create_app():
         resp.headers.setdefault("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
         resp.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
         resp.headers.setdefault("X-XSS-Protection", "1; mode=block")
+
         if resp.mimetype == "text/html":
-            resp.headers.setdefault(
-                "Content-Security-Policy",
-                "default-src 'self'; img-src 'self' data:; style-src 'self'; "
-                "font-src 'self'; script-src 'self'; base-uri 'none'; form-action 'self'; object-src 'none';"
-            )
+            csp = [
+                "default-src 'self'",
+                "img-src 'self' data:",
+                "style-src 'self'",
+                "font-src 'self'",
+                f"script-src 'self' {PLAUSIBLE}",
+                f"connect-src 'self' {PLAUSIBLE}",
+                "base-uri 'none'",
+                "form-action 'self'",
+                "object-src 'none'"
+            ]
+            resp.headers["Content-Security-Policy"] = "; ".join(csp)
         return resp
 
     return _app
