@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>{{ page_title or "fusion" }}</title>
+
+  <script defer data-domain="fusionencode.com" src="https://plausible.io/js/script.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="{{ url_for('static', filename='css/main.css') }}?v3" rel="stylesheet">
   {% block extra_head %}{% endblock %}
